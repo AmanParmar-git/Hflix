@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import "./App.css";
 import Rows from "./Rows";
 import Row from "./row";
-
+import NavBar from "./NavBar";
 class App extends Component {
   state = {
     color: true,
@@ -64,25 +64,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <nav
-          className="navbar navbar-dark bg-transparent justify-content-between"
-          style={{ position: "fixed", width: "100%" }}
-        >
-          <form
-            className="form-inline"
-            style={{ margin: "0% auto" }}
-            id="search"
-          >
-            <input
-              className="form-control mr-sm-2"
-              placeholder="Search"
-              aria-label="Search"
-              value={this.state.query}
-              onChange={this.handleChange}
-              style={{ backgroundColor: "transparent" }}
-            />
-          </form>
-        </nav>
+        <NavBar query={this.state.query} handleChange={this.handleChange} />
         {this.getRows()}
       </Fragment>
     );

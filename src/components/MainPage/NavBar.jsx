@@ -3,19 +3,29 @@ import "./NavBar.css";
 
 class NavBar extends Component {
   state = {};
+
   render() {
     return (
-      <React.Fragment>
-        <input
-          className="form-control"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
-          Search
-        </button>
-      </React.Fragment>
+      <nav
+        className="navbar navbar-expand-lg navbar-light bg-black"
+        style={{
+          position: "fixed",
+          width: "100%",
+        }}
+      >
+        <form
+          className="form-inline my-2 my-lg-0"
+          style={{ marginLeft: "auto" }}
+        >
+          <input
+            className="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            value={this.props.query}
+            onChange={this.props.handleChange}
+          />
+        </form>
+      </nav>
     );
   }
 }

@@ -8,21 +8,18 @@ class MoviePage extends Component {
   state = {
     movie: [],
     link: "",
-    download: false,
-    torrents: [],
-    loading: true,
+    hover: true,
   };
 
   async componentDidMount() {
     let { data } = await getDetails(this.props.location.state.movie);
-
     this.setState({ movie: data });
     let link = await getVideo(this.state.movie);
     this.setState({ link });
   }
 
   getBG = () => {
-    if (this.state.movie.backdrop_path) {
+    if (this.state.movie.poster_path) {
       return {
         backgroundImage: `url(${
           "https://image.tmdb.org/t/p/w1280" + this.state.movie.backdrop_path
@@ -80,11 +77,46 @@ class MoviePage extends Component {
     }
   };
 
+  getrightdiv = () => {
+    if (this.state.hover) {
+      return (
+        <div className="rightdiv">
+          <img
+            src={
+              "https://image.tmdb.org/t/p/w342" + this.state.movie.poster_path
+            }
+            alt="Not Found!"
+            style={{
+              maxBlockSize: "400px",
+              padding: "1px",
+              marginLeft: "30%",
+              marginTop: "10%",
+            }}
+          ></img>
+          <h5
+            style={{
+              textAlign: "center",
+              color: "white",
+              marginTop: "5%",
+              fontFamily: "sans-serif",
+            }}
+          >
+            <em>{this.state.movie.tagline}</em>
+          </h5>
+        </div>
+      );
+    }
+  };
+
   render() {
     const { title, name, overview } = this.state.movie;
     return (
       <div className="main" style={this.getBG()}>
-        <div className="float">
+        <div
+          className="float"
+          onMouseEnter={() => this.setState({ hover: true })}
+          onMouseLeave={() => this.setState({ hover: false })}
+        >
           <div className="leftdiv">
             <h3
               style={{
@@ -134,6 +166,8 @@ class MoviePage extends Component {
             <br></br>
             {this.getDate()}
           </div>
+
+          {this.getrightdiv()}
         </div>
       </div>
     );

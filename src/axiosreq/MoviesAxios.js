@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api_key = process.env.api_key;
+const api_key = process.env.REACT_APP_api_key;
 const collections = [
   `https://api.themoviedb.org/3/movie/upcoming?api_key=${api_key}&language=en-US&page=1`,
   `https://api.themoviedb.org/3/discover/tv?api_key=${api_key}&with_networks=213`,
@@ -31,12 +31,12 @@ async function getMovies(index, query) {
       collections[index] + `query=${query}&page=1&include_adult=false`
     );
     for (let movie of res.data.results) {
-      if (movie.poster_path)
+      if (movie.poster_path != null) {
         movies.images.push(
           "https://image.tmdb.org/t/p/w185" + movie.poster_path
         );
-      else movies.images.push("404");
-      movies.titles.push(movie);
+        movies.titles.push(movie);
+      }
     }
     return movies;
   }

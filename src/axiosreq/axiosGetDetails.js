@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api_key = `?api_key=${process.env.api_key}&language=en-US`;
+const api_key = `?api_key=${process.env.REACT_APP_api_key}&language=en-US`;
 
 const collections = [
   "https://api.themoviedb.org/3/tv/",
